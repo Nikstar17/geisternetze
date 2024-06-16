@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Geisternetze</title>
+    <link rel="stylesheet" href="style.css"/>
+</h:head>
+<h:body>
+    <header>
+        <div>
+            <nav>
+                <ul>
+                    <li><a href="index.xhtml">Home</a></li>
+                    <li><a href="netzmelden.xhtml">Geisternetz melden</a></li>
+                    <li><a class="active" href="datenbank.xhtml">Datenbank</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="datenbanktext">
+            <h1 class="h1_datenbank">Gemeldete Netze</h1>
+            <p class="p_datenbank">Du möchtest ein gemeldetes Netz bergen? Oder ein gemeldetes Netz ist verschollen?</p>
+            <p class="p_datenbank">Klicke auf "🤿", hinterlasse deine Kontaktdaten und das ausgewählte Netz wird als "BERGUNG_BEVORSTEHEND" markiert.</p>
+            <p class="p_datenbank">Klicke auf "❔", hinterlasse deine Kontaktdaten und das ausgewählte Netz wird als "VERSCHOLLEN" markiert.</p>
+        </div>
+        <div class="table_div">
+            <h:dataTable value="#{netzDatenbankController.gemeldeteNetze}" var="netz" styleClass="table-custom">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="DURCHMESSER"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.durchmesser}m"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="BREITENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.breitengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="LÄNGENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.laengengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="STATUS"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.status}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="BERGUNG ANKÜNDIGEN"/>
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink value="🤿"
+                                       action="#{netzController.netzBergenFormular(netz.id, netz.durchmesser, netz.laengengrad, netz.breitengrad)}"/>
+                    </h:form>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="VERSCHOLLEN"/>
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink value="❔"
+                                       action="#{netzController.netzVerschollenFormular(netz.id, netz.durchmesser, netz.laengengrad, netz.breitengrad)}"/>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div class="datenbanktext">
+            <h1 class="h1_datenbank">Netze die zurzeit geborgen werden</h1>
+            <p class="p_datenbank">Du hast ein Netz erfolgreich geborgen? Oder ist es verschollen?</p>
+            <p class="p_datenbank">Klicke auf "🚢", hinterlasse deine Kontaktdaten und das ausgewählte Netz wird als "GEBORGEN" markiert.</p>
+            <p class="p_datenbank">Klicke auf "❔", hinterlasse deine Kontaktdaten und das ausgewählte Netz wird als "VERSCHOLLEN" markiert.</p>
+        </div>
+        <div class="table_div">
+            <h:dataTable value="#{netzDatenbankController.bergungBevorstehendNetze}" var="netz"
+                         styleClass="table-custom">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="DURCHMESSER"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.durchmesser}m"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="BREITENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.breitengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="LÄNGENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.laengengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="STATUS"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.status}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="GEBORGEN MELDEN"/>
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink value="🚢"
+                                       action="#{netzController.netzGeborgenFormular(netz.id, netz.durchmesser, netz.laengengrad, netz.breitengrad)}"/>
+                    </h:form>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="VERSCHOLLEN"/>
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink value="❔"
+                                       action="#{netzController.netzVerschollenFormular(netz.id, netz.durchmesser, netz.laengengrad, netz.breitengrad)}"/>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div class="datenbanktext">
+            <h1 class="h1_datenbank">Erfolgreich geborgende Netze</h1>
+        </div>
+        <div class="table_div">
+            <h:dataTable value="#{netzDatenbankController.geborgendeNetze}" var="netz" styleClass="table-custom">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="DURCHMESSER"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.durchmesser}m"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="BREITENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.breitengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="LÄNGENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.laengengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="STATUS"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.status}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+
+        <div class="datenbanktext">
+            <h1 class="h1_datenbank">Verschollende Netze</h1>
+        </div>
+        <div class="table_div">
+            <h:dataTable value="#{netzDatenbankController.verschollendeNetze}" var="netz" styleClass="table-custom">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="DURCHMESSER"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.durchmesser}m"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="BREITENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.breitengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="LÄNGENGRAD"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.laengengrad}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="STATUS"/>
+                    </f:facet>
+                    <h:outputText value="#{netz.status}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </main>
+    <footer>
+        <p>©2024 Ghost Net Fishing. Alle Rechte vorbehalten.</p>
+    </footer>
+</h:body>
+</html>
